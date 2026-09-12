@@ -1,3 +1,4 @@
+
 // rafce
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -6,6 +7,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import zxcvbn from "zxcvbn";
 import { useForm } from "react-hook-form";
+
+const API = import.meta.env.VITE_API_URL;
 
 const registerSchema = z
   .object({
@@ -49,7 +52,10 @@ const Register = () => {
     // console.log("ok ลูกพี่");
     // Send to Back
     try {
-      const res = await axios.post("http://localhost:5001/api/register", data);
+      const res = await axios.post(
+`${API}/api/register`,
+data
+);
 
       console.log(res.data);
       toast.success(res.data);

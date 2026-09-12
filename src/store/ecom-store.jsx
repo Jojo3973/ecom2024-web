@@ -1,9 +1,13 @@
+
+
 import axios from "axios";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { listCategory } from "../api/Category";
 import { listProduct, searchFilters } from "../api/product";
 import _ from "lodash";
+
+const API = import.meta.env.VITE_API_URL;
 
 const ecomStore = (set, get) => ({
   user: null,
@@ -49,7 +53,10 @@ const ecomStore = (set, get) => ({
     }, 0);
   },
   actionLogin: async (form) => {
-    const res = await axios.post("http://localhost:5001/api/login", form);
+    const res = await axios.post(
+`${API}/api/login`,
+form
+);
     set({
       user: res.data.payload,
       token: res.data.token,
